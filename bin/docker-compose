@@ -10,8 +10,8 @@ convertWin() {
     echo $start | sed 's#/#\\#g'
 }
 
-target=$(convertC $(pwd))
-source=$(convertWin $(convertC $(pwd)))
+target=$(convertC $(pwd -P))
+source=$(convertWin $(convertC $(pwd -P)))
 
 docker run \
     -it \
