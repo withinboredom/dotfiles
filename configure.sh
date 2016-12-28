@@ -26,4 +26,8 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 sudo apt update
 sudo apt upgrade -y
 
+curl -s https://raw.githubusercontent.com/ZZROTDesign/docker-clean/v2.0.4/docker-clean |
+sudo tee /usr/local/bin/docker-clean > /dev/null && \
+sudo chmod +x /usr/local/bin/docker-clean
+
 set +e
