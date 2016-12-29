@@ -1,0 +1,29 @@
+#!/bin/bash
+
+convertC() {
+    echo ${1#"/mnt"}
+}
+
+convertWin() {
+    declare start=${1#"/"}
+    start=${start:0:1}:${start:1}
+    echo $start | sed 's#/#\\#g'
+}
+
+target=$(convertC $(pwd -P))
+source=$(convertWin $(convertC $(pwd -P)))
+home=/c/Users/withi
+
+if [ "$1" == "login" ]; then
+    docker run -it --rm --entrypoint /bin/bash -v $home:/root withinboredom/rocker:latest
+fi
+
+docker run \
+    -it \
+    --rm \
+    -v "$source:$target" \
+    -w $target \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v $home:/root \
+    withinboredom/rocker:latest \
+    $@
